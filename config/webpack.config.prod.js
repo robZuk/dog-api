@@ -11,7 +11,7 @@ module.exports = {
   },
   output: {
     filename: "js/[name]-[contenthash].js",
-    path: path.resolve(__dirname, "../", "build")
+    path: path.resolve(__dirname, "../", "dist")
   },
   module: {
     rules: [
