@@ -6,9 +6,9 @@ const nextRandomImage = document.querySelector(
   ".random-dog__description-next-image"
 );
 
-// const nextBreedImage = document.querySelector(
-//   ".breed-dog__description-next-image"
-// );
+const nextBreedImage = document.querySelector(
+  ".breed-dog__description-next-image"
+);
 //const dogName = document.querySelector("random-dog__description-name");
 
 const show = new Show();
@@ -20,7 +20,7 @@ const data = new Data();
 data.getRandomImage().then(img => show.showImageWhenReady(img));
 
 nextRandomImage.addEventListener("click", () => show.refreshRandomImage());
-//nextBreedImage.addEventListener("click", () => show.refreshBreedImage());
+nextBreedImage.addEventListener("click", () => show.refreshBreedImage());
 // data.listBreeds();
 show.showAllBreeds();
 

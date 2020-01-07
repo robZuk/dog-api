@@ -13,6 +13,10 @@ class Show {
     this.nextRandomImage = document.querySelector(
       ".random-dog__description-next-image"
     );
+
+    this.nextBreedImage = document.querySelector(
+      ".breed-dog__description-next-image"
+    );
     this.tilesEl = document.querySelector(".tiles");
     this.breedName = null;
     this.breedType = null;
@@ -32,8 +36,6 @@ class Show {
   }
 
   showImageWhenReady(img) {
-    //this.data.randomImageTable.push(img);
-    //console.log(`show`, this.data.randomImageTable);
     this.randomImgEl.style.backgroundImage = `url('${img}')`;
     this.randomDogName.innerHTML = `Here you can see ${this.data.extractBreedName(
       img
@@ -41,13 +43,13 @@ class Show {
     this.hideLoading();
   }
 
-  // showBreedImageWhenReady(img) {
-  //   console.log(img);
-  //   this.randomImgEl.style.backgroundImage = `url('${img}')`;
-  //   // this.dogName.innerHTML = `Here you can see ${this.data.extractBreedName(
-  //   //   img
-  //   // )}`;
-  // }
+  showBreedImageWhenReady(img) {
+    console.log(img);
+    this.randomImgEl.style.backgroundImage = `url('${img}')`;
+    this.randomDogName.innerHTML = `Here you can see ${this.breedName}`;
+
+    this.hideLoading();
+  }
 
   refreshRandomImage() {
     this.data.getRandomImage().then(img => {
@@ -82,7 +84,7 @@ class Show {
     tileContent.addEventListener("click", () => {
       this.breedName = name;
       this.breedType = type;
-      this.nextRandomImage.innerHTML = `Next ${name} image`;
+      this.nextBreedImage.innerHTML = `Next ${this.breedName} image`;
       console.log(type);
       window.scrollTo(0, 0);
       this.showLoading();
@@ -113,11 +115,11 @@ class Show {
     });
   }
 
-  // refreshBreedImage() {
-  //   this.data
-  //     .getRandomImageByBreed(this.breedType)
-  //     .then(img => this.showBreedImageWhenReady(img));
-  //   //this.showLoading();
-  // }
+  refreshBreedImage() {
+    this.data
+      .getRandomImageByBreed(this.breedType)
+      .then(img => this.showBreedImageWhenReady(img));
+    this.showLoading();
+  }
 }
 export default Show;
