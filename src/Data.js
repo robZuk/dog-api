@@ -41,6 +41,16 @@ class Data {
     } catch (err) {}
   };
 
+  getRandomImageListByBreed = async breedImg => {
+    try {
+      const response = await fetch(`${this.apiUrl}/breed/${breedImg}/images`);
+      const data = await response.json();
+      const breeds = data.message;
+      //console.log(breed);
+      return breeds;
+    } catch (err) {}
+  };
+
   // getBreedName() {
   //   const dogName = this.getRandomImage().then(dataUrl =>
   //     this.extractBreedName(dataUrl)

@@ -20,7 +20,7 @@ class Show {
     this.tilesEl = document.querySelector(".tiles");
     this.breedName = null;
     this.breedType = null;
-
+    this.index = 0;
     this.data = new Data();
   }
 
@@ -85,13 +85,17 @@ class Show {
       this.breedName = name;
       this.breedType = type;
       this.nextBreedImage.innerHTML = `Next ${this.breedName} image`;
-      console.log(type);
+      //console.log(type);
       window.scrollTo(0, 0);
       this.showLoading();
 
+      // this.data
+      //   .getRandomImageByBreed(type)
+      //   .then(img => this.showImageWhenReady(img));
+
       this.data
-        .getRandomImageByBreed(type)
-        .then(img => this.showImageWhenReady(img));
+        .getRandomImageListByBreed(type)
+        .then(images => this.showImageWhenReady(images[0]));
     });
 
     tile.appendChild(tileContent);
@@ -117,8 +121,30 @@ class Show {
 
   refreshBreedImage() {
     this.data
-      .getRandomImageByBreed(this.breedType)
-      .then(img => this.showBreedImageWhenReady(img));
+      .getRandomImageListByBreed(this.breedType)
+      .then(
+        images => (
+          this.index < images.length - 1
+            ? this.index++
+            : (this.index = images.length - 1),
+          this.showBreedImageWhenReady(images[this.index]),
+          console.log(this.index, images.length)
+        )
+      );
+    this.showLoading();
+  }
+
+  refreshPreviousBreedImage() {
+    this.data
+      .getRandomImageListByBreed(this.breedType)
+      .then(
+        images => (
+          this.index > 0 ? this.index-- : (this.index = 0),
+          this.showBreedImageWhenReady(images[this.index]),
+          console.log(this.index)
+        )
+      );
+
     this.showLoading();
   }
 }
