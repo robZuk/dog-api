@@ -17,6 +17,11 @@ class Show {
     this.nextBreedImage = document.querySelector(
       ".breed-dog__description-next-image"
     );
+
+    this.previousBreedImage = document.querySelector(
+      ".breed-dog__description-previous-image"
+    );
+
     this.tilesEl = document.querySelector(".tiles");
     this.breedName = null;
     this.breedType = null;
@@ -45,6 +50,7 @@ class Show {
 
   showBreedImageWhenReady(img) {
     console.log(img);
+
     this.randomImgEl.style.backgroundImage = `url('${img}')`;
     this.randomDogName.innerHTML = `Here you can see ${this.breedName}`;
 
@@ -85,6 +91,7 @@ class Show {
       this.breedName = name;
       this.breedType = type;
       this.nextBreedImage.innerHTML = `Next ${this.breedName} image`;
+      this.previousBreedImage.innerHTML = `Next ${this.breedName} image`;
       //console.log(type);
       window.scrollTo(0, 0);
       this.showLoading();
