@@ -1,5 +1,4 @@
-.random-dog,
-.breed-dog {
+.featured-dog {
   padding: $main-spacing;
   border: 1px solid $border-color;
   display: flex;
@@ -23,9 +22,15 @@
     }
   }
 
-  .random-dog__description,
-  .breed-dog__descripion {
+  .featured-dog__description {
     flex: 1;
     padding: 0 $main-spacing;
+    &-next-btn-breed-image,
+    &-previous-btn-breed-image {
+      display: none;
+      &--visible {
+        display: block;
+      }
+    }
   }
 }

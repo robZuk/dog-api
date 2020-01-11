@@ -1,7 +1,6 @@
 class Data {
   constructor() {
     this.apiUrl = "https://dog.ceo/api";
-    this.spinnerEl = document.querySelector(".lds-dual-ring");
   }
 
   getRandomImage = async () => {
@@ -24,7 +23,6 @@ class Data {
       const response = await fetch(`${this.apiUrl}/breeds/list/all`);
       const data = await response.json();
       const list = data;
-      //console.log(list.message);
       return list.message;
     } catch (err) {}
   };
@@ -46,16 +44,8 @@ class Data {
       const response = await fetch(`${this.apiUrl}/breed/${breedImg}/images`);
       const data = await response.json();
       const breeds = data.message;
-      //console.log(breed);
       return breeds;
     } catch (err) {}
   };
-
-  // getBreedName() {
-  //   const dogName = this.getRandomImage().then(dataUrl =>
-  //     this.extractBreedName(dataUrl)
-  //   );
-  //   return dogName;
-  // }
 }
 export default Data;
