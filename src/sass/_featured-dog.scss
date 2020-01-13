@@ -25,8 +25,8 @@
   .featured-dog__description {
     flex: 1;
     padding: 0 $main-spacing;
-    &-next-btn-breed-image,
-    &-previous-btn-breed-image {
+    &-btn-next-breed-image,
+    &-btn-previous-breed-image {
       display: none;
       &--visible {
         display: block;

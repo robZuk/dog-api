@@ -1,0 +1,35 @@
+.featured-dog__description-btn {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 2fr;
+  grid-gap: 20px 15px;
+  align-content: space-between;
+  justify-content: space-evenly;
+  &-next-random-image {
+    grid-column: 1/2;
+  }
+  &-next-breed-image,
+  &-previous-breed-image {
+    grid-row: 3/4;
+  }
+  &-next-random-image,
+  &-next-breed-image,
+  &-previous-breed-image {
+    border-style: none;
+    font-family: "Montserrat", sans-serif;
+    border: 0.5px solid black;
+    padding: 5% 1%;
+    background-color: inherit;
+    margin-top: 15px;
+    transition: 0.2s;
+    &:hover {
+      color: white;
+      background-color: $primary-color;
+      border: 0.5px solid $primary-color;
+    }
+  }
+  .featured-dog__description-btn-next-breed-image,
+  .featured-dog__description-btn-previous-breed-image {
+    display: inline flex;
+  }
+}

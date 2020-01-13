@@ -3,15 +3,15 @@ import Show from "./Show.js";
 import Data from "./Data";
 
 const nextRandomImage = document.querySelector(
-  ".featured-dog__description-next-btn-random-image"
+  ".featured-dog__description-btn-next-random-image"
 );
 
 const nextBreedImage = document.querySelector(
-  ".featured-dog__description-next-btn-breed-image"
+  ".featured-dog__description-btn-next-breed-image"
 );
 
 const previousBreedImage = document.querySelector(
-  ".featured-dog__description-previous-btn-breed-image"
+  ".featured-dog__description-btn-previous-breed-image"
 );
 
 const show = new Show();

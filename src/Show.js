@@ -6,13 +6,12 @@ class Show {
     this.dogName = document.querySelector(".featured-dog__description-name");
     this.spinner = document.querySelector(".featured-dog__wrapper-spinner");
     this.nextBreedImage = document.querySelector(
-      ".featured-dog__description-next-btn-breed-image"
+      ".featured-dog__description-btn-next-breed-image"
     );
     this.previousBreedImage = document.querySelector(
-      ".featured-dog__description-previous-btn-breed-image"
+      ".featured-dog__description-btn-previous-breed-image"
     );
     this.tiles = document.querySelector(".tiles");
-    this.breedName = null;
     this.breedType = null;
     this.index = 0;
     this.data = new Data();
@@ -21,7 +20,6 @@ class Show {
   showLoading() {
     this.spinner.classList.add("featured-dog__wrapper-spinner--visible");
   }
-
   hideLoading() {
     this.spinner.classList.remove("featured-dog__wrapper-spinner--visible");
   }
@@ -34,15 +32,6 @@ class Show {
     this.hideLoading();
   }
 
-  showBreedImageWhenReady(img) {
-    console.log(img);
-
-    this.randomImg.style.backgroundImage = `url('${img}')`;
-    this.dogName.innerHTML = `Here you can see ${this.breedName}`;
-
-    this.hideLoading();
-  }
-
   refreshRandomImage() {
     this.data.getRandomImage().then(img => {
       this.showImageWhenReady(img);
@@ -51,15 +40,15 @@ class Show {
       )}`;
     });
     this.nextBreedImage.classList.remove(
-      "featured-dog__description-next-btn-breed-image--visible"
+      "featured-dog__description-btn-next-breed-image--visible"
     );
     this.previousBreedImage.classList.remove(
-      "featured-dog__description-previous-btn-breed-image--visible"
+      "featured-dog__description-btn-previous-breed-image--visible"
     );
     this.showLoading();
   }
 
-  addBreed(breed, subBreed) {
+  addBreedList(breed, subBreed) {
     let name;
     let type;
 
@@ -76,33 +65,31 @@ class Show {
 
     const tileContent = document.createElement("div");
     tileContent.classList.add("tiles__tile-content");
+    tile.appendChild(tileContent);
+    this.tiles.appendChild(tile);
 
     tileContent.innerText = name;
     tileContent.addEventListener("click", () => {
-      this.breedName = name;
       this.breedType = type;
-      this.nextBreedImage.innerHTML = `Next ${this.breedName} image`;
-      this.previousBreedImage.innerHTML = `Previous ${this.breedName} image`;
-      this.nextBreedImage.classList.add(
-        "featured-dog__description-next-btn-breed-image--visible"
-      );
-      this.previousBreedImage.classList.add(
-        "featured-dog__description-previous-btn-breed-image--visible"
-      );
-      window.scrollTo(0, 0);
-      this.showLoading();
-
-      // this.data
-      //   .getRandomImageByBreed(type)
-      //   .then(img => this.showImageWhenReady(img));
-
+      this.addBreedName(name);
       this.data
         .getRandomImageListByBreed(type)
         .then(images => this.showImageWhenReady(images[0]));
     });
+  }
 
-    tile.appendChild(tileContent);
-    this.tiles.appendChild(tile);
+  addBreedName(name) {
+    this.index = 0;
+    this.nextBreedImage.innerHTML = `Next ${name} image`;
+    this.previousBreedImage.innerHTML = `Previous ${name} image`;
+    this.nextBreedImage.classList.add(
+      "featured-dog__description-btn-next-breed-image--visible"
+    );
+    this.previousBreedImage.classList.add(
+      "featured-dog__description-btn-previous-breed-image--visible"
+    );
+    window.scrollTo(0, 0);
+    this.showLoading();
   }
 
   showAllBreeds() {
@@ -111,11 +98,11 @@ class Show {
         //wszystkie rasy
         if (breeds[breed].length === 0) {
           //jeśli nie ma podras
-          this.addBreed(breed);
+          this.addBreedList(breed);
         } else {
           for (const subBreed of breeds[breed]) {
             //jeśli są podrasy, breeds[breed] to tabel z podrasami
-            this.addBreed(breed, subBreed);
+            this.addBreedList(breed, subBreed);
           }
         }
       }
@@ -130,7 +117,7 @@ class Show {
           this.index < images.length - 1
             ? this.index++
             : (this.index = images.length - 1),
-          this.showBreedImageWhenReady(images[this.index])
+          this.showImageWhenReady(images[this.index])
         )
       );
     this.showLoading();
@@ -142,8 +129,7 @@ class Show {
       .then(
         images => (
           this.index > 0 ? this.index-- : (this.index = 0),
-          this.showBreedImageWhenReady(images[this.index]),
-          console.log(this.index)
+          this.showImageWhenReady(images[this.index])
         )
       );
 
